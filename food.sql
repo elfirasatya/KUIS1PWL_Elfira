@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Inang: 127.0.0.1
--- Waktu pembuatan: 04 Okt 2020 pada 15.03
+-- Waktu pembuatan: 09 Okt 2020 pada 05.02
 -- Versi Server: 5.5.32
 -- Versi PHP: 5.4.19
 
@@ -86,8 +86,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2020_09_24_231139_create_articles_table', 1),
-(5, '2020_10_03_011219_create_bodykits_table', 1);
+(4, '2020_09_24_231139_create_articles_table', 1);
 
 -- --------------------------------------------------------
 
@@ -109,15 +108,23 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` bigint(20) unsigned NOT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data untuk tabel `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(2, 'Elfira Satya Pramesti', 'elfirasatya@gmail.com', NULL, '$2y$10$Ylw4hfrf5HS2pBufTbEIOebFgCxXMfsBj8XEDXtbfSYPABH.FRSZe', NULL, '2020-10-08 01:53:00', '2020-10-08 01:53:00');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
