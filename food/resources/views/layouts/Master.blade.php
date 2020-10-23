@@ -39,7 +39,7 @@
             <a class="nav-link" href="{{ url('./about') }}">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
+            <a class="nav-link" href="{{ url('./manage') }}">Manage</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url('./contact') }}">Contact</a>
@@ -60,6 +60,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url('./message') }}"> Message</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

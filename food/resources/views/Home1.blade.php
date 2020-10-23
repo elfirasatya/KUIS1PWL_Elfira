@@ -22,7 +22,7 @@
             <div class="card-body">
                 <h2 class="card-title">{{ $artic->title }}</h2>
             <p class="card-text">{{ Str::limit($artic->content, 100, '...') }}</p>
-                <a href="{{ './article/'.$artic->id }}" class="btn btn-primary">Read More &rarr;</a>
+                <a href="{{ './article/'.$artic->id }}" class="btn btn-primary">Baca Lebih lanjut &rarr;</a>
             </div>
             <div class="card-footer text-muted">
               Posted on {{ $artic->created_at }} by

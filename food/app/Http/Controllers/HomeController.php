@@ -23,7 +23,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function __invoke()
     {
             Cache::remember('article', 10, function(){
                 return Article::all();

@@ -6,3 +6,10 @@
 body {
   padding-top: 56px;
 }
+.btn-primary {
+  background-color : #31aae2;
+  border-color     : #31aae2;
+}
+.btn-anjim{
+  margin-left: 47%;
+}
