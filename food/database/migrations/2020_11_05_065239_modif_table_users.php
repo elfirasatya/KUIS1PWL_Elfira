@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFoodsTable extends Migration
+class ModifTableUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateFoodsTable extends Migration
      */
     public function up()
     {
-        Schema::create('foods', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('title');
-            $table->text('content');
-            $table->string('imageurl');
-            $table->timestamps();
-        });
+        Schema::table('users',function (Blueprint $table){
+            $table->string("roles");
+            });
     }
 
     /**
@@ -29,6 +25,8 @@ class CreateFoodsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('foods');
+        Schema::table('users',function (Blueprint $table){
+            $table->dropColumn("roles");
+            });
     }
 }

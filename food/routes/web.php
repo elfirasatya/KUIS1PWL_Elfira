@@ -19,14 +19,18 @@ Route::get('/message', 'MessageController@message')->name('message');
 
 Route::get('/home', 'HomeController')->name('home');
 
+//kolom manage
 Route::get('/manage', 'ArticleController@manage')->name('manage');
-
 Route::get('/manage/add','ArticleController@add');
-
 Route::post('/manage/create','ArticleController@create');
-
 Route::get('/manage/edit/{id}','ArticleController@edit');
-
 Route::post('/manage/update/{id}','ArticleController@update');
-
 Route::get('/manage/delete/{id}','ArticleController@delete');
+
+//kolom user
+Route::get('/user', 'UserController@user')->name('user');
+Route::get('/user/add','UserController@add');
+Route::post('/user/create','UserController@create');
+Route::get('/user/edit/{id}','UserController@edit');
+Route::post('/user/update/{id}','UserController@update');
+Route::get('/user/delete/{id}','UserController@delete');

@@ -30,19 +30,35 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-          <a class="nav-link" href="{{ url('./home') }}">Home
-              <span class="sr-only">(current)</span>
-            </a>
+          <li class="nav-item active {{ Route::is('home')? 'active' : '' }}">
+          @can('user-display')
+          <a class="nav-link" href="{{ url('./home') }}">Home</a>
+            @endcan
           </li>
           <li class="nav-item">
+          @can('user-display')
             <a class="nav-link" href="{{ url('./about') }}">About</a>
+          @endcan
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{ Route::is('manage')? 'active' : '' }}">
+            @can('manage-articles')
             <a class="nav-link" href="{{ url('./manage') }}">Manage</a>
+            @endcan
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{ Route::is('contact')? 'active' : '' }}">
+          @can('user-display')
             <a class="nav-link" href="{{ url('./contact') }}">Contact</a>
+            @endcan
+          </li>
+          <li class="nav-item {{ Route::is('message')? 'active' : '' }}">
+            @can('manage-articles')
+            <a class="nav-link" href="{{ url('./message') }}">Message</a>
+            @endcan
+          </li>
+          <li class="nav-item {{ Route::is('user')? 'active' : '' }}">
+            @can('manage-articles')
+            <a class="nav-link" href="{{ url('./user') }}">User</a>
+            @endcan
           </li>
           @guest
                             <li class="nav-item">
@@ -60,7 +76,6 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ url('./message') }}"> Message</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
