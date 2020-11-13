@@ -1,5 +1,5 @@
 @extends('layouts.Master')
-@section('title', 'Manage')
+@section('title', 'Manage Masakan')
     
 @section('content')
 
@@ -12,8 +12,6 @@
         <div class="card-header text-center">
             <h3>Daftar Artikel Masakan Nusantara</h3>
         </div>
-        <a href="manage/add" class="btn btn-primary">Tambah Data</a>
-</br>
 </br>
 <div class="card body">
 <table class="table table-bordered table-striped">
@@ -22,7 +20,8 @@
             <th>No</th>
             <th>Judul</th>
             <th>Tanggal</th>
-            <th> Pilihan </th>
+            <th>Gambar Masakan </th>
+            <th>Pilihan </th>
         </tr>
     </thead>
     <tbody>
@@ -31,12 +30,15 @@
             <td>{{$artic->id}}</td>
             <td>{{$artic->title}}</td>
             <td>{{$artic->updated_at}}</td>
-            <td>  <a href="manage/edit/{{ $artic->id }}" class="badge badgewarning">Edit</a> 
-             <a href="manage/delete/{{ $artic->id }}" class="badge badgedanger">Hapus</a> </td>
+            <td> <img src="{{asset('/storage/'.$artic->imageurl) }}" alt="imageCap"></td>
+            <td> <a href="manage/edit/{{ $artic->id }}" class="btn btn-primary">Edit</a> 
+             <a href="manage/delete/{{ $artic->id }}" class="btn btn-primary">Hapus</a>
         </tr>
     @endforeach
     </tbody>
 </table>
+<a href="manage/add" class="btn btn-primary">Tambah Data</a> <br>
+        <a href="manage/cetak_pdf" class="btn btn-primary"target="_blank">CETAK PDF</a> </td>
 </div>
 </div>
 </div>

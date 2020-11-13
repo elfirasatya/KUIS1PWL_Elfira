@@ -6,14 +6,16 @@ use Illuminate\Http\Request;
 use App\Article;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
+use PDF;
+
 class ArticleController extends Controller
 {
     public function __construct(){
-    //$this->middleware('auth');
-    $this->middleware(function($request, $next){
-        if(Gate::allows('manage-articles')) return $next($request);
-        abort(403, 'Anda tidak memiliki cukup hak akses');
-        });
+    $this->middleware('auth');
+   // $this->middleware(function($request, $next){
+        //if(Gate::allows('manage-articles')) return $next($request);
+        //abort(403, 'Anda tidak memiliki cukup hak akses');
+        //});
 
     }
     public function __invoke($id){
@@ -29,11 +31,14 @@ class ArticleController extends Controller
         return view('addarticle');
     }
     public function create(Request $request){
+        if($request->file('image')){
+            $image_name = $request->file('image')->store('images','public');
+        }
         Article::create([
         'id' => $request->id,
         'title' => $request->title,
         'content' => $request->content,
-        'imageurl' => $request->image
+        'imageurl' => $image_name
     ]);
         return redirect('/manage');
     }
@@ -45,7 +50,14 @@ class ArticleController extends Controller
         $article = Article::find($id);
         $article->title = $request->title;
         $article->content = $request->content;
-        $article->imageurl = $request->image;
+        if($article->imageurl &&
+        file_exists(storage_path('app/public/' . $article->imageurl)))
+            {
+                \Storage::delete('public/'.$article->imageurl);
+            }
+            $image_name = $request->file('image')->store('images', 'public');
+            $article->imageurl = $image_name;
+
         $article->save();
         return redirect('/manage');
     }
@@ -54,4 +66,10 @@ class ArticleController extends Controller
         $article->delete();
         return redirect('/manage');
     }
+    public function cetak_pdf(){
+        $article = Article::all();
+        $pdf = PDF::loadview('articles_pdf',['article'=>$article]);
+        return $pdf->stream();
+    }
+    
 }

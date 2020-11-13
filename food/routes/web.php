@@ -26,6 +26,7 @@ Route::post('/manage/create','ArticleController@create');
 Route::get('/manage/edit/{id}','ArticleController@edit');
 Route::post('/manage/update/{id}','ArticleController@update');
 Route::get('/manage/delete/{id}','ArticleController@delete');
+Route::get('/manage/cetak_pdf', 'ArticleController@cetak_pdf');
 
 //kolom user
 Route::get('/user', 'UserController@user')->name('user');
@@ -34,3 +35,5 @@ Route::post('/user/create','UserController@create');
 Route::get('/user/edit/{id}','UserController@edit');
 Route::post('/user/update/{id}','UserController@update');
 Route::get('/user/delete/{id}','UserController@delete');
+
+
