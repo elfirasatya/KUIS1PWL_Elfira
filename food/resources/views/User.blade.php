@@ -12,7 +12,6 @@
         <div class="card-header text-center">
             <h3>Daftar User Login dari Masakan Nusantara</h3>
         </div>
-        <a href="user/add" class="btn btn-primary">Tambah Data</a>
 </br>
 </br>
 <div class="card body">
@@ -23,6 +22,7 @@
             <th>Nama</th>
             <th>Email</th>
             <th> Hak Akses </th>
+            <th> Gambar Profil</th>
             <th> Pilihan </th>
         </tr>
     </thead>
@@ -33,12 +33,15 @@
             <td>{{$user->name}}</td>
             <td>{{$user->email}}</td>
             <td>{{$user->roles}}</td>
-            <td>  <a href="user/edit/{{ $user->id }}" class="badge badgewarning">Edit</a> 
-             <a href="user/delete/{{ $user->id }}" class="badge badgedanger">Hapus</a> </td>
+            <td> <img src="{{asset('storage/'.$user->imageurl) }}" alt="imageCap"></td>
+            <td>  <a href="user/edit/{{ $user->id }}" class="btn btn-primary">Edit</a> 
+             <a href="user/delete/{{ $user->id }}" class="btn btn-primary">Hapus</a> </td>
         </tr>
     @endforeach
     </tbody>
 </table>
+<a href="user/add" class="btn btn-primary">Tambah Data</a> <br>
+        <a href="user/cetak_pdf" class="btn btn-primary"target="_blank">CETAK PDF</a> </td>
 </div>
 </div>
 </div>

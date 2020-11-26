@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
+use PDF;
 class UserController extends Controller
 {
     public function __construct(){
@@ -29,12 +30,16 @@ class UserController extends Controller
         return view('adduser');
     }
     public function create(Request $request){
+        if($request->file('image')){
+            $image_name = $request->file('image')->store('images','public');
+        }
         User::create([
         'id' => $request->id,
         'name' => $request->name,
         'email' => $request->email,
         'password' => \Hash::make ($request->password),
-        'roles' => $request->roles
+        'roles' => $request->roles,
+        'imageurl' => $image_name
     ]);
         return redirect('/user');
     }
@@ -46,8 +51,15 @@ class UserController extends Controller
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = \Hash::$request->password;
+        $user->password = \Hash::make ($request->password);
         $user->roles = $request->roles;
+        if($user->imageUser &&
+        file_exists(storage_path('app/public/' . $imageurl)))
+        {
+            \Storage::delete('public/'.$user->imageurl);
+        }
+        $image_name = $request->file('image')->store('images', 'public');
+        $user->imageurl = $image_name;
         $user->save();
         return redirect('/user');
     }
@@ -55,5 +67,10 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
         return redirect('/user');
+    }
+    public function cetak_pdf(){
+        $user = User::all();
+        $pdf = PDF::loadview('users_pdf',['user'=>$user]);
+        return $pdf->stream();
     }
 }
